@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wesley Haruo Kurosawa - Data Engineer & Full Stack Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2C3E50;
+            --secondary: #1A1A2E;
+            --accent: #16213E;
+            --text: #E8E8E8;
+            --white: #FFFFFF;
+            --dark-blue: #0F3460;
+            --gold: #C9A961;
+            --gradient: linear-gradient(135deg, #2C3E50 0%, #34495E 100%);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--secondary);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .bg-animation span {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--gold);
+            border-radius: 50%;
+            animation: float 15s infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid rgba(201, 169, 97, 0.1);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-content .description {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .social-links a {
+            padding: 0.8rem 1.5rem;
+            background: var(--dark-blue);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-weight: 600;
+            border: 1px solid rgba(201, 169, 97, 0.2);
+        }
+
+        .social-links a:hover {
+            background: var(--gold);
+            color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(201, 169, 97, 0.3);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Stats Section */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: var(--accent);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid rgba(201, 169, 97, 0.2);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(201, 169, 97, 0.2);
+            border-color: var(--gold);
+        }
+
+        .stat-card h3 {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card p {
+            font-size: 1.1rem;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: var(--accent);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(201, 169, 97, 0.2);
+            transition: all 0.3s;
+        }
+
+        .skill-category:hover {
+            border-color: var(--gold);
+            box-shadow: 0 10px 30px rgba(201, 169, 97, 0.2);
+        }
+
+        .skill-category h3 {
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .skill-bar {
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-bar .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .skill-progress {
+            background: rgba(201, 169, 97, 0.1);
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .skill-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold) 0%, #D4AF37 100%);
+            border-radius: 5px;
+            transition: width 1s ease;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--accent);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s;
+            border: 1px solid rgba(201, 169, 97, 0.2);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(201, 169, 97, 0.2);
+            border-color: var(--gold);
+        }
+
+        .project-header {
+            background: var(--gradient);
+            padding: 1.5rem;
+            color: var(--white);
+        }
+
+        .project-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-status {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .project-body {
+            padding: 1.5rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .tech-tag {
+            background: rgba(201, 169, 97, 0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--gold);
+            border: 1px solid rgba(201, 169, 97, 0.3);
+        }
+
+        .project-metrics {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(201, 169, 97, 0.2);
+        }
+
+        .project-metrics p {
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--accent);
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(201, 169, 97, 0.2);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .projects-grid,
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <span style="left: 10%; animation-delay: 0s;"></span>
+        <span style="left: 20%; animation-delay: 2s;"></span>
+        <span style="left: 30%; animation-delay: 4s;"></span>
+        <span style="left: 40%; animation-delay: 6s;"></span>
+        <span style="left: 50%; animation-delay: 8s;"></span>
+        <span style="left: 60%; animation-delay: 10s;"></span>
+        <span style="left: 70%; animation-delay: 12s;"></span>
+        <span style="left: 80%; animation-delay: 14s;"></span>
+        <span style="left: 90%; animation-delay: 16s;"></span>
+    </div>
+
+    <nav>
+        <div class="container">
+            <div class="logo">WH.dev</div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Wesley Haruo Kurosawa</h1>
+            <p class="subtitle">Data Engineer & Full Stack Developer</p>
+            <p class="description">Building scalable solutions with modern tech | Transforming data into actionable insights | Architecting cloud-native applications</p>
+            <div class="social-links">
+                <a href="https://linkedin.com/in/Wesleyharuo" target="_blank">LinkedIn</a>
+                <a href="mailto:wesley_haruo@gmail.com">Email</a>
+                <a href="https://github.com/wesleyharuo" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>Professional Impact</h2>
+        <div class="stats">
+            <div class="stat-card fade-in">
+                <h3>40%</h3>
+                <p>Performance Improvement in Data Processing</p>
+            </div>
+            <div class="stat-card fade-in">
+                <h3>99.9%</h3>
+                <p>Uptime for Production Applications</p>
+            </div>
+            <div class="stat-card fade-in">
+                <h3>$500K+</h3>
+                <p>Cost Savings Through Automation</p>
+            </div>
+            <div class="stat-card fade-in">
+                <h3>15+</h3>
+                <p>Cross-Functional Projects Led</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2>Technical Expertise</h2>
+        <div class="skills-grid">
+            <div class="skill-category fade-in">
+                <h3>Frontend Development</h3>
+                <div class="skill-bar">
+                    <div class="skill-name">
+                        <span>React, Next.js, TypeScript</span>
+                        <span>95%</span>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 95%"></div>
+                    </div>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-name">
+                        <span>Vue.js, Tailwind CSS</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 90%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-category fade-in">
+                <h3>Backend Development</h3>
+                <div class="skill-bar">
+                    <div class="skill-name">
+                        <span>Python, Django, FastAPI</span>
+                        <span>98%</span>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 98%"></div>
+                    </div>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-name">
+                        <span>Node.js, Express</span>
+                        <span>92%</span>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 92%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-category fade-in">
+                <h3>Cloud & DevOps</h3>
+                <div class="skill-bar">
+                    <div class="skill-name">
+                        <span>AWS, Azure, GCP</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 90%"></div>
+                    </div>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-name">
+                        <span>Docker, Kubernetes</span>
+                        <span>88%</span>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 88%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-category fade-in">
+                <h3>Data Engineering</h3>
+                <div class="skill-bar">
+                    <div class="skill-name">
+                        <span>Apache Spark, Airflow</span>
+                        <span>92%</span>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 92%"></div>
+                    </div>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-name">
+                        <span>Pandas, NumPy, dbt</span>
+                        <span>95%</span>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 95%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2>Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <h3>CardGuard - Fraud Detection</h3>
+                    <div class="project-status">
+                        <span>🔒 Public</span>
+                        <span>🔥 Production Ready</span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <p>Advanced fraud detection system with real-time scoring and pattern recognition algorithms.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Scikit-learn</span>
+                        <span class="tech-tag">XGBoost</span>
+                        <span class="tech-tag">TensorFlow</span>
+                        <span class="tech-tag">FastAPI</span>
+                        <span class="tech-tag">Docker</span>
+                    </div>
+                    <div class="project-metrics">
+                        <p>💰 $2M+ prevented fraudulent transactions</p>
+                        <p>⚡ 85% reduction in false positives</p>
+                        <p>🎯 99.2% fraud detection accuracy</p>
+                        <p>🔧 Modular from-scratch implementation</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <h3>AI Fraud Detection Canada</h3>
+                    <div class="project-status">
+                        <span>🔒 Public</span>
+                        <span>🏦 Enterprise Grade</span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <p>Canadian financial fraud detection with FINTRAC & PIPEDA compliance for banks and credit unions.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Neural Networks</span>
+                        <span class="tech-tag">Kubernetes</span>
+                        <span class="tech-tag">Microservices</span>
+                    </div>
+                    <div class="project-metrics">
+                        <p>🏦 FINTRAC & PIPEDA compliant</p>
+                        <p>🚀 Handles millions of transactions</p>
+                        <p>🔒 Bank-grade encryption</p>
+                        <p>🌐 English/French support</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <h3>NextLens StockView</h3>
+                    <div class="project-status">
+                        <span>🔒 Private</span>
+                        <span>📈 Active Development</span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <p>Real-time stock analysis platform with live market data and ML-powered predictive analytics.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Chart.js</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">Express</span>
+                    </div>
+                    <div class="project-metrics">
+                        <p>📈 Real-time stock analysis</p>
+                        <p>🤖 ML-powered insights</p>
+                        <p>📱 Mobile-first responsive design</p>
+                        <p>⚡ Sub-second data updates</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <h3>Predicta Suite - Sales Forecasting</h3>
+                    <div class="project-status">
+                        <span>🔒 Public</span>
+                        <span>📊 Analytics Ready</span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <p>Advanced sales forecasting with time series analysis and automated reporting capabilities.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Prophet</span>
+                        <span class="tech-tag">ARIMA</span>
+                        <span class="tech-tag">Plotly</span>
+                        <span class="tech-tag">Pandas</span>
+                    </div>
+                    <div class="project-metrics">
+                        <p>💰 25% improvement in planning</p>
+                        <p>📈 92% forecast precision</p>
+                        <p>⚡ Automated monthly reports</p>
+                        <p>📊 Interactive dashboards</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <h3>Medic System - Healthcare Management</h3>
+                    <div class="project-status">
+                        <span>🔒 Public</span>
+                        <span>🏥 Healthcare Ready</span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <p>Complete healthcare management with patient records, appointments, and prescription tracking.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Django/Flask</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">HIPAA Compliant</span>
+                    </div>
+                    <div class="project-metrics">
+                        <p>⚡ 40% reduction in admin time</p>
+                        <p>📈 95% patient satisfaction</p>
+                        <p>🔒 End-to-end encryption</p>
+                        <p>👨‍⚕️ Complete medical records</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <h3>SensRisk - Risk Assessment</h3>
+                    <div class="project-status">
+                        <span>🔒 Private</span>
+                        <span>⚖️ Risk Management</span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <p>Enterprise risk assessment platform with multi-factor analysis and compliance tracking.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Python</span>
+                    </div>
+                    <div class="project-metrics">
+                        <p>💰 30% lower risk exposure</p>
+                        <p>🛡️ 100% regulatory adherence</p>
+                        <p>⚡ Instant risk alerts</p>
+                        <p>📊 Multi-factor analysis</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <h3>DigitalMenuHub - Restaurant Tech</h3>
+                    <div class="project-status">
+                        <span>🔒 Public</span>
+                        <span>🍽️ Restaurant Ready</span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <p>QR code digital menu system with real-time updates and multi-language support.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">QR Integration</span>
+                    </div>
+                    <div class="project-metrics">
+                        <p>📈 35% increase in order efficiency</p>
+                        <p>💰 20% boost in order value</p>
+                        <p>⭐ 4.8/5 customer satisfaction</p>
+                        <p>📱 QR code contactless dining</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <h3>QuickStats Web - Statistics Service</h3>
+                    <div class="project-status">
+                        <span>🔒 Public Template</span>
+                        <span>📊 Statistics Platform</span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <p>Web-based statistical analysis with interactive charts and professional report generation.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Statistical Algorithms</span>
+                    </div>
+                    <div class="project-metrics">
+                        <p>👨‍🎓 1000+ students using platform</p>
+                        <p>⚡ 90% faster analysis</p>
+                        <p>📚 Educational focus</p>
+                        <p>📊 Multiple statistical tests</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <h3>Calc Vector - Vector Analysis Tool</h3>
+                    <div class="project-status">
+                        <span>🔒 Public</span>
+                        <span>🎓 Educational Tool</span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <p>Interactive vector calculation tool with 3D visualization for engineering students.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Streamlit</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">NumPy</span>
+                        <span class="tech-tag">Plotly</span>
+                    </div>
+                    <div class="project-metrics">
+                        <p>👨‍🎓 500+ students benefited</p>
+                        <p>📚 STEM education focused</p>
+                        <p>📐 Real-time calculations</p>
+                        <p>🎯 Interactive 3D plots</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <h3>Canadian Banknote Authentication</h3>
+                    <div class="project-status">
+                        <span>🔒 Public</span>
+                        <span>🇨🇦 Security Application</span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <p>Machine learning-based authentication system for Canadian currency verification.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Scikit-learn</span>
+                        <span class="tech-tag">OpenCV</span>
+                        <span class="tech-tag">MIT License</span>
+                    </div>
+                    <div class="project-metrics">
+                        <p>🛡️ 99.8% authentication accuracy</p>
+                        <p>⚡ Sub-second processing</p>
+                        <p>🏦 Bank-grade security</p>
+                        <p>🇨🇦 Canadian currency focus</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <h3>PDF to Word Converter</h3>
+                    <div class="project-status">
+                        <span>🔒 Public</span>
+                        <span>🔄 Utility Tool</span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <p>Batch PDF conversion tool with format preservation and folder processing support.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">PowerShell</span>
+                        <span class="tech-tag">Document Processing</span>
+                    </div>
+                    <div class="project-metrics">
+                        <p>📄 Batch processing support</p>
+                        <p>🔄 Layout integrity maintained</p>
+                        <p>⚡ Optimized algorithms</p>
+                        <p>📁 Directory processing</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <h3>Login Matrix - Authentication System</h3>
+                    <div class="project-status">
+                        <span>🔒 Public</span>
+                        <span>🔐 Security Framework</span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <p>Advanced authentication system with multi-factor auth and secure session management.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                    </div>
+                    <div class="project-metrics">
+                        <p>🔐 Multi-factor authentication</p>
+                        <p>🛡️ Secure token management</p>
+                        <p>📊 Complete audit trails</p>
+                        <p>⚡ Fast response times</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Let's Build Something Amazing</h2>
+        <div class="contact-content">
+            <p>I'm always interested in innovative projects and collaboration opportunities. Whether it's a startup venture, enterprise solution, or open-source contribution, let's connect!</p>
+            <div class="social-links">
+                <a href="https://linkedin.com/in/Wesleyharuo" target="_blank">LinkedIn</a>
+                <a href="mailto:wesley_haruo@gmail.com">Email Me</a>
+                <a href="https://github.com/wesleyharuo" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Wesley Haruo Kurosawa. Built with passion for technology and innovation.</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.7;">"Code is like humor. When you have to explain it, it's bad." - Cory House</p>
+    </footer>
+
+    <script>
+        // Scroll Animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Skill Bar Animation
+        const skillBars = document.querySelectorAll('.skill-progress-bar');
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bar = entry.target;
+                    const width = bar.style.width;
+                    bar.style.width = '0';
+                    setTimeout(() => {
+                        bar.style.width = width;
+                    }, 100);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        skillBars.forEach(bar => skillObserver.observe(bar));
+    </script>
+</body>
+</html>
